@@ -1,5 +1,5 @@
 ---
-import { db, eq, and, Cities, Monuments, Countries, PostCard } from 'astro:db';
+import { db, eq, Cities, Monuments, Countries, PostCard } from 'astro:db';
  
 import Layout from '@/layouts/Layout.astro';
 import LeftIcon from '@/icons/astro/LeftIcon.astro';
@@ -9,8 +9,6 @@ import LastMonumentVisited from '@/sections/city/LastMonumentVisited.astro';
 import Stamps from '@/sections/city/Stamps.astro';
 import ShowMonuments from '@/components/ShowMonuments';
 import CityPostCards from '@/sections/city/CityPostCards';
-import type { or } from 'astro:db';
-import Monument from './[city]/monument/[monument].astro';
 
 const { country, city } = Astro.params;
 const { user } = Astro.locals;

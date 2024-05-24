@@ -6,7 +6,7 @@ interface Props {
     message: string;
     from: string;
     to: string;
-    date: string;
+    date: Date;
     image: string;
     postageStamp: string;
 }
@@ -19,18 +19,21 @@ const cityId = city.split(' ').join('').toLowerCase();
         <div id={`${cityId}Postcard`} class="relative h-full w-full rounded-lg shadow-xl transition-all duration-200 [transform-style:preserve-3d]">
             <section class="absolute inset-0 bg-stone-400 rounded-lg">
                 <img src={ image } alt="" class="w-full h-full rounded-lg object-cover opacity-75">
-                <div class="absolute inset-0 grid place-content-center text-black/50 text-7xl sm:text-8xl border border-black m-5 uppercase">{ city }</div>
+                <div class="absolute inset-0 grid place-content-center text-black text-6xl sm:text-8xl [text-shadow:1px_1px_white] border border-black m-5 uppercase">{ city }</div>
             </section>
             <section class="absolute inset-0 grid grid-cols-2 bg-stone-200 [transform:rotateY(180deg)] [backface-visibility:hidden] rounded-lg">
-                <article class="grid place-content-center w-full border-r-2 p-4 my-4 border-black/25">{ message }</article>
-                <article class="flex flex-col p-4 items-end gap-2 sm:gap-4">
-                    <picture class="relative sm:mb-4">
-                        <PostageStamp class="w-auto h-14 sm:h-20 text-black" />
-                        <img class="absolute top-0 right-0 h-[48px] sm:h-[68px] w-[38px] sm:w-[54px] mt-[4px] sm:mt-[6px] mr-[4px] sm:mr-[5.5px]" src={ postageStamp } alt="">
+                <article class="grid place-content-center w-full text-[11px] md:text-base border-r-2 p-4 my-4 border-black/25">{ message }</article>
+                <article class="relative flex flex-col p-4 justify-center items-end gap-2 sm:gap-4">
+                    <picture class="absolute top-4 md:top-8 right-4 md:right-8 border-4 border-black">
+                        <img class="h-8 md:h-12 w-auto aspect-video outline-dotted outline-4 outline-offset-2 outline-stone-200" src={ postageStamp } alt="">
                     </picture>
-                    <span class="w-full border-b-2 border-black">From: { from }</span>
-                    <span class="w-full border-b-2 border-black">To: { to }</span>
-                    <span class="w-full border-b-2 border-black">Date: { date }</span>
+                    <span class="w-full text-[11px] md:text-base border-b-2 border-black">De: { from }</span>
+                    <span class="w-full text-[11px] md:text-base border-b-2 border-black">Para: { to }</span>
+                    <span class="w-full text-[11px] md:text-base border-b-2 border-black capitalize">Fecha: {date?.toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit',
+                    })}</span>
                 </article>
             </section>
         </div>

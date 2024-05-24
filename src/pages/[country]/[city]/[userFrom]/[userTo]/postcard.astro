@@ -1,0 +1,27 @@
+---
+import CityPostCard from '@/components/CityPostCard.astro';
+import Layout from '@/layouts/Layout.astro';
+import { db, eq, and, Countries, Cities, Monuments, User, PostCard } from 'astro:db';
+
+const { country, city, monument, userFrom, userTo } = Astro.params;
+
+const currentCountry = await db.select().from(Countries).where(eq(Countries.name, country!));
+const currentCity = await db.select().from(Cities).where(and(eq(Cities.name, city!), eq(Cities.countryId, currentCountry[0].id)));
+const currentUserFrom = await db.select().from(User).where(eq(User.id, Number(userFrom!)));
+const currentUserTo = await db.select().from(User).where(eq(User.id, Number(userTo!)));
+
+const currentPostCard = await db.select().from(PostCard).where(and(eq(PostCard.cityId, currentCity[0].id), eq(PostCard.from, currentUserFrom[0].id), eq(PostCard.to, currentUserTo[0].id)));
+---
+<Layout title="Viajes G&G">
+	<main class="flex flex-col justify-center items-center">
+		<CityPostCard
+			city={currentCity[0].name};
+			message={currentPostCard[0].message};
+			from={currentUserFrom[0].name};
+			to={currentUserTo[0].name};
+			date={currentPostCard[0].date};
+			image={currentPostCard[0].image};
+			postageStamp={currentPostCard[0].stampImage};
+		/>
+	</main>
+</Layout>
