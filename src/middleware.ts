@@ -6,6 +6,5 @@ export const onRequest = defineMiddleware(({locals, cookies, redirect, url}, nex
     }
 
     locals.user = cookies.has('user') ? JSON.parse(String(cookies.get('user')?.value)) : null;
-
     return next();
 });
