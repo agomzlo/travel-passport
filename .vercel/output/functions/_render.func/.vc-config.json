@@ -1,6 +1,0 @@
-{
-	"runtime": "nodejs20.x",
-	"handler": "home/alexos/Projects/personal-projects/travel-passport-2/.vercel/output/_functions/entry.mjs",
-	"launcherType": "Nodejs",
-	"supportsResponseStreaming": true
-}
